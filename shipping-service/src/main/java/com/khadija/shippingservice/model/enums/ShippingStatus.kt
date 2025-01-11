@@ -1,4 +1,4 @@
-package com.khadija.shippingservice.model
+package com.khadija.shippingservice.model.enums
 
 enum class ShippingStatus {
     PENDING,

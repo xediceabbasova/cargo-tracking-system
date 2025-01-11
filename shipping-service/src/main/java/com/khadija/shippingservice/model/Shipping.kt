@@ -1,5 +1,6 @@
 package com.khadija.shippingservice.model
 
+import com.khadija.shippingservice.model.enums.ShippingStatus
 import jakarta.persistence.Column
 import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
@@ -33,7 +34,7 @@ data class Shipping @JvmOverloads constructor(
     val shippingStatus: ShippingStatus = ShippingStatus.PENDING,
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    var createdAt: ZonedDateTime,
+    var createdAt: ZonedDateTime? = null,
 
     @Column(name = "updated_at", insertable = false)
     var updatedAt: ZonedDateTime? = null
@@ -42,6 +43,7 @@ data class Shipping @JvmOverloads constructor(
     fun prePersist() {
         createdAt = ZonedDateTime.now(ZoneOffset.UTC)
     }
+
     @PreUpdate
     fun preUpdate() {
         updatedAt = ZonedDateTime.now(ZoneOffset.UTC)

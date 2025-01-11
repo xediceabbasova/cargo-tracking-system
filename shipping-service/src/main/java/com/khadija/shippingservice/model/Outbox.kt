@@ -28,7 +28,7 @@ data class Outbox @JvmOverloads constructor(
     val payload: String,
 
     @Column(name = "created_at", nullable = false)
-    var createdAt: ZonedDateTime,
+    var createdAt: ZonedDateTime? = null,
 ) {
     @PrePersist
     fun prePersist() {
