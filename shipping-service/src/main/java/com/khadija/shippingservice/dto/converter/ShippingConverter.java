@@ -7,6 +7,8 @@ import com.khadija.shippingservice.model.Address;
 import com.khadija.shippingservice.model.Shipping;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ShippingConverter {
 
@@ -21,7 +23,6 @@ public class ShippingConverter {
                 )
         );
     }
-
 
     public ShippingDto fromShipping(Shipping shipping) {
         AddressDto addressDto = new AddressDto(
@@ -39,4 +40,11 @@ public class ShippingConverter {
                 shipping.getUpdatedAt()
         );
     }
+
+    public List<ShippingDto> convert(List<Shipping> from) {
+        return from.stream()
+                .map(this::fromShipping)
+                .toList();
+    }
+
 }

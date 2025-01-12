@@ -17,12 +17,12 @@ public class OutboxConverter {
         this.objectMapper = objectMapper;
     }
 
-    public Outbox convertToOutbox(Shipping shipping) {
+    public Outbox convertToOutbox(Shipping shipping, String eventType) {
         try {
             String payload = objectMapper.writeValueAsString(shipping);
-            return new Outbox(Objects.requireNonNull(shipping.getId()), "Shipping Created", payload);
+            return new Outbox(Objects.requireNonNull(shipping.getId()), eventType, payload);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error while converting Shipping to Outbox", e);
         }
     }
 }
